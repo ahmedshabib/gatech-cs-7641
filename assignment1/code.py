@@ -431,8 +431,8 @@ def generate_svm_analysis():
     final_classifier_evaluation(estimator_vocal, X_train, X_test, y_train, y_test)
 
 
-# generate_decision_tree_analysis()
-# generate_neural_network_analysis()
+generate_decision_tree_analysis()
+generate_neural_network_analysis()
 generate_boosting_analysis()
-# generate_knn_analysis()
-# generate_svm_analysis()
+generate_svm_analysis()
+generate_knn_analysis()
