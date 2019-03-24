@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assignment 2 Randomized Optimization" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assignment 2 Randomized Optimization/ABAGAIL" vcs="Git" />
   </component>
 </project>
