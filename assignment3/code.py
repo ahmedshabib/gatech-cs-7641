@@ -27,16 +27,6 @@ plt.rcParams['axes.titlesize'] = 12
 plt.rcParams['font.size'] = 12
 
 
-#
-#
-# def import_data():
-#     X1 = np.array(df_phish.values[:, 1:-1], dtype='int64')
-#     Y1 = np.array(df_phish.values[:, 0], dtype='int64')
-#     X2 = np.array(df_bank.values[:, 1:-1], dtype='int64')
-#     Y2 = np.array(df_bank.values[:, 0], dtype='int64')
-#     return X1, Y1, X2, Y2
-
-
 def NNGridSearchCV(X_train, y_train):
     lr = [0.01, 0.05, .1]
     hidden_layer_sizes = [5, 10, 20, 30, 40, 50, 75, 100]
@@ -388,9 +378,9 @@ def addclusters(X, km_labels, em_labels):
 
 def dimensionality_reduction_analysis():
     X_p, Y_p, df_phish = get_phishing_data()
-    # run_PCA(X_p, Y_p, "Phishing Data")
-    # run_ICA(X_p, Y_p, "Phishing Data")
-    # run_RCA(X_p, Y_p, "Phishing Data")
+    run_PCA(X_p, Y_p, "Phishing Data")
+    run_ICA(X_p, Y_p, "Phishing Data")
+    run_RCA(X_p, Y_p, "Phishing Data")
     imp_phish, topcols_phish = run_RFC(X_p, Y_p, df_original=df_phish)
     pca_phish = PCA(n_components=32, random_state=5).fit_transform(X_p)
     ica_phish = ICA(n_components=32, random_state=5).fit_transform(X_p)
@@ -398,72 +388,72 @@ def dimensionality_reduction_analysis():
     rfc_phish = df_phish[topcols_phish]
     rfc_phish = np.array(rfc_phish.values, dtype='int64')[:, :32]
     #
-    # run_kmeans(pca_phish, Y_p, 'PCA Phishing Data')
-    # run_kmeans(ica_phish, Y_p, 'ICA Phishing Data')
-    # run_kmeans(rca_phish, Y_p, 'RCA Phishing Data')
-    # run_kmeans(rfc_phish, Y_p, 'RFC Phishing Data')
-    #
-    # evaluate_kmeans(KMeans(n_clusters=14, n_init=10, random_state=100, n_jobs=-1), pca_phish, Y_p, title="PCA")
-    # evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), ica_phish, Y_p, title="ICA")
-    # evaluate_kmeans(KMeans(n_clusters=10, n_init=10, random_state=100, n_jobs=-1), rca_phish, Y_p, title="RCA")
-    # evaluate_kmeans(KMeans(n_clusters=2, n_init=10, random_state=100, n_jobs=-1), rfc_phish, Y_p, title="RFC")
-    #
-    # run_EM(pca_phish, Y_p, 'PCA Phishing Data')
-    # run_EM(ica_phish, Y_p, 'ICA Phishing Data')
-    # run_EM(rca_phish, Y_p, 'RCA Phishing Data')
-    # run_EM(rfc_phish, Y_p, 'RFC Phishing Data')
-    #
-    # evaluate_EM(
-    #     EM(n_components=67, covariance_type='diag', n_init=1, warm_start=True, random_state=100), pca_phish, Y_p,
-    #     title="PCA")
-    # evaluate_EM(
-    #     EM(n_components=64, covariance_type='diag', n_init=1, warm_start=True, random_state=100), ica_phish, Y_p,
-    #     title="ICA")
-    # evaluate_EM(
-    #     EM(n_components=64, covariance_type='diag', n_init=1, warm_start=True, random_state=100), rca_phish, Y_p,
-    #     title="RCA")
-    # evaluate_EM(
-    #     EM(n_components=32, covariance_type='diag', n_init=1, warm_start=True, random_state=100), rfc_phish, Y_p,
-    #     title="RFC")
-    #
-    # X_v, Y_v, df_vocal = get_vocal_data()
-    # run_PCA(X_v, Y_v, "Phone Me Data")
-    # run_ICA(X_v, Y_v, "Phone Me Data")
-    # run_RCA(X_v, Y_v, "Phone Me Data")
-    # imp_vocal, topcols_vocal = run_RFC(X_v, Y_v, df_original=df_vocal)
-    # pca_vocal = PCA(n_components=4, random_state=5).fit_transform(X_v)
-    # ica_vocal = ICA(n_components=4, random_state=5).fit_transform(X_v)
-    # rca_vocal = RCA(n_components=4, random_state=5).fit_transform(X_v)
-    # rfc_vocal = df_vocal[topcols_vocal]
-    # rfc_vocal = np.array(rfc_vocal.values, dtype='int64')[:, :4]
-    #
-    # run_kmeans(pca_vocal, Y_v, 'PCA Phone Me Data')
-    # run_kmeans(ica_vocal, Y_v, 'ICA Phone Me Data')
-    # run_kmeans(rca_vocal, Y_v, 'RCA Phone Me Data')
-    # run_kmeans(rfc_vocal, Y_v, 'RFC Phone Me Data')
-    #
-    # evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), pca_vocal, Y_v, title="PCA")
-    # evaluate_kmeans(KMeans(n_clusters=10, n_init=10, random_state=100, n_jobs=-1), ica_vocal, Y_v, title="ICA")
-    # evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), rca_vocal, Y_v, title="RCA")
-    # evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), rfc_vocal, Y_v, title="RFC")
-    #
-    # run_EM(pca_vocal, Y_v, 'PCA Phone Me Data')
-    # run_EM(ica_vocal, Y_v, 'ICA Phone Me Data')
-    # run_EM(rca_vocal, Y_v, 'RCA Phone Me Data')
-    # run_EM(rfc_vocal, Y_v, 'RFC Phone Me Data')
-    #
-    # evaluate_EM(
-    #     EM(n_components=58, covariance_type='diag', n_init=1, warm_start=True,
-    #        random_state=100), pca_vocal, Y_v, title="PCA")
-    # evaluate_EM(
-    #     EM(n_components=52, covariance_type='diag', n_init=1, warm_start=True,
-    #        random_state=100), ica_vocal, Y_v, title="ICA")
-    # evaluate_EM(
-    #     EM(n_components=56, covariance_type='diag', n_init=1, warm_start=True,
-    #        random_state=100), rca_vocal, Y_v, title="RCA")
-    # evaluate_EM(
-    #     EM(n_components=48, covariance_type='diag', n_init=1, warm_start=True,
-    #        random_state=100), rfc_vocal, Y_v, title="RFC")
+    run_kmeans(pca_phish, Y_p, 'PCA Phishing Data')
+    run_kmeans(ica_phish, Y_p, 'ICA Phishing Data')
+    run_kmeans(rca_phish, Y_p, 'RCA Phishing Data')
+    run_kmeans(rfc_phish, Y_p, 'RFC Phishing Data')
+
+    evaluate_kmeans(KMeans(n_clusters=14, n_init=10, random_state=100, n_jobs=-1), pca_phish, Y_p, title="PCA")
+    evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), ica_phish, Y_p, title="ICA")
+    evaluate_kmeans(KMeans(n_clusters=10, n_init=10, random_state=100, n_jobs=-1), rca_phish, Y_p, title="RCA")
+    evaluate_kmeans(KMeans(n_clusters=2, n_init=10, random_state=100, n_jobs=-1), rfc_phish, Y_p, title="RFC")
+
+    run_EM(pca_phish, Y_p, 'PCA Phishing Data')
+    run_EM(ica_phish, Y_p, 'ICA Phishing Data')
+    run_EM(rca_phish, Y_p, 'RCA Phishing Data')
+    run_EM(rfc_phish, Y_p, 'RFC Phishing Data')
+
+    evaluate_EM(
+        EM(n_components=67, covariance_type='diag', n_init=1, warm_start=True, random_state=100), pca_phish, Y_p,
+        title="PCA")
+    evaluate_EM(
+        EM(n_components=64, covariance_type='diag', n_init=1, warm_start=True, random_state=100), ica_phish, Y_p,
+        title="ICA")
+    evaluate_EM(
+        EM(n_components=64, covariance_type='diag', n_init=1, warm_start=True, random_state=100), rca_phish, Y_p,
+        title="RCA")
+    evaluate_EM(
+        EM(n_components=32, covariance_type='diag', n_init=1, warm_start=True, random_state=100), rfc_phish, Y_p,
+        title="RFC")
+
+    X_v, Y_v, df_vocal = get_vocal_data()
+    run_PCA(X_v, Y_v, "Phone Me Data")
+    run_ICA(X_v, Y_v, "Phone Me Data")
+    run_RCA(X_v, Y_v, "Phone Me Data")
+    imp_vocal, topcols_vocal = run_RFC(X_v, Y_v, df_original=df_vocal)
+    pca_vocal = PCA(n_components=4, random_state=5).fit_transform(X_v)
+    ica_vocal = ICA(n_components=4, random_state=5).fit_transform(X_v)
+    rca_vocal = RCA(n_components=4, random_state=5).fit_transform(X_v)
+    rfc_vocal = df_vocal[topcols_vocal]
+    rfc_vocal = np.array(rfc_vocal.values, dtype='int64')[:, :4]
+
+    run_kmeans(pca_vocal, Y_v, 'PCA Phone Me Data')
+    run_kmeans(ica_vocal, Y_v, 'ICA Phone Me Data')
+    run_kmeans(rca_vocal, Y_v, 'RCA Phone Me Data')
+    run_kmeans(rfc_vocal, Y_v, 'RFC Phone Me Data')
+
+    evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), pca_vocal, Y_v, title="PCA")
+    evaluate_kmeans(KMeans(n_clusters=10, n_init=10, random_state=100, n_jobs=-1), ica_vocal, Y_v, title="ICA")
+    evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), rca_vocal, Y_v, title="RCA")
+    evaluate_kmeans(KMeans(n_clusters=12, n_init=10, random_state=100, n_jobs=-1), rfc_vocal, Y_v, title="RFC")
+
+    run_EM(pca_vocal, Y_v, 'PCA Phone Me Data')
+    run_EM(ica_vocal, Y_v, 'ICA Phone Me Data')
+    run_EM(rca_vocal, Y_v, 'RCA Phone Me Data')
+    run_EM(rfc_vocal, Y_v, 'RFC Phone Me Data')
+
+    evaluate_EM(
+        EM(n_components=58, covariance_type='diag', n_init=1, warm_start=True,
+           random_state=100), pca_vocal, Y_v, title="PCA")
+    evaluate_EM(
+        EM(n_components=52, covariance_type='diag', n_init=1, warm_start=True,
+           random_state=100), ica_vocal, Y_v, title="ICA")
+    evaluate_EM(
+        EM(n_components=56, covariance_type='diag', n_init=1, warm_start=True,
+           random_state=100), rca_vocal, Y_v, title="RCA")
+    evaluate_EM(
+        EM(n_components=48, covariance_type='diag', n_init=1, warm_start=True,
+           random_state=100), rfc_vocal, Y_v, title="RFC")
 
     # Comparing With NN
     # Original
@@ -586,6 +576,6 @@ def dimensionality_reduction_analysis():
                        NN_train_score_rca, NN_train_score_rfc, 'Phishing Dataset')
 
 
-# kmeans_analysis()
-# em_analysis()
+kmeans_analysis()
+em_analysis()
 dimensionality_reduction_analysis()
